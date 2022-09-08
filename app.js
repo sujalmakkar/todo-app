@@ -23,6 +23,7 @@ app.listen(port,()=>{
 
 //DATABASE CONNECTION
 var db;
+
 mongoClient.connect(url=process.env.MONGODB).then(client=>{
     db = client.db('new')
 }).then(()=>console.log('connected to database')).catch(err=>console.log(err))
