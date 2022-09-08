@@ -46,7 +46,7 @@ app.post('/newUser',async (req,res)=>{
     }
 })
 
-const secret = 'randomsecttvdcadvcb'
+const secret = 'rand'
 
 app.post('/authenticate', (req,res)=>{
     var data = req.body; //GET SUBMITTED USERNAME AND PASSWORD
