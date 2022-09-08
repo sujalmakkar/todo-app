@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TODO APP</title>
+
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src='https://unpkg.com/react-router-dom@5.0.0/umd/react-router-dom.min.js'></script>
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100&family=Syne:wght@400;500;600&display=swap" rel="stylesheet">
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>
+
+  </head>
+  <body>
+    <div id="contents"></div>
+    <script type="module" src="react.js"></script>
+  </body>
+  <style>
+    *{
+        padding:0;
+        margin:0;
+        box-sizing:border-box;
+    }
+    body{
+        font-family:poppins;
+        font-size: 18px;
+        font-weight:300;
+        width:100%;
+        background:rgba(78, 21, 184, 0.2);
+    }
+    .todo{
+      padding:10px;
+      margin:10px;
+      width:auto;
+      min-width: 30%;
+      border:1px solid rgba(58, 24, 151, 0.12);
+      overflow:hidden;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 8px;
+      transition: all .3s ease;
+    }
+    .todo:hover{
+      border: 1px solid rgba(78, 21, 184, 0.8);
+    }
+    .todo span{
+      font-size: 20px;
+      transition: all .5s ease;
+    }
+    .todo .todo-text{
+      transition: all .5s ease;
+      padding:0px 30px 0px 30px;
+      color:rgba(50, 4, 134, 0.9);
+    }
+    .todo-text.todo-done{
+      text-decoration: line-through;
+    }
+    .todo .deltodo, .todo .doneIndicator{
+        font-size:24px;
+        cursor:pointer;
+        padding:5px 10px 5px 10px;
+        overflow: hidden;
+        border-radius:6px;
+        user-select: none;
+    }
+    .todo .deltodo:hover{
+      background:rgba(12, 0, 0, 0.788);
+      color:white;
+    }
+    .todo .doneIndicator-done:hover{
+      background:rgba(160, 5, 5, 0.788);
+      color:white;      
+    }
+    .todo .doneIndicator-not-done:hover{
+      background:rgba(5, 148, 48, 0.788);
+      color:white;      
+    }
+    .todo-container{
+      width:100%;
+      display:flex;
+      align-items: center;
+      justify-content:center;
+      flex-direction:column-reverse;
+      padding-bottom: 100px;
+    }
+    .todos-page{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction:column;
+      width: 100%;
+    }
+    .todos-page .heading{
+      color:rgba(50, 4, 134, 0.9);
+      font-size: 30px;
+      font-weight:400;
+      padding:30px;
+    }
+    .todos-page .todo-form , .todo-form form{
+      width:100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction:row;
+    }
+
+    .todos-page .todo-form input{
+      padding:15px;
+      min-width:40%;
+      display: inline-block;
+      font-family: poppins;
+      font-size: 20px;
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+      background:transparent;
+      outline: none;
+      border: 1px solid rgba(78, 21, 184, 0.3);
+      margin:0px 0px 10px 0px;
+      transition: all .3s ease;
+      color:rgba(50, 4, 134, 0.9);
+    }
+    .todos-page .todo-form input:focus,.todos-page .todo-form input:hover{
+      border: 1px solid rgba(78, 21, 184, .9);
+    }
+    .form2 input{
+      padding:20px;
+      margin:10px;
+    }
+    .todos-page .todo-form button{
+      padding:18.5px;
+      display: inline-block;
+      font-size: 20px;
+      border:none;
+      outline: none;
+      border: 1px solid rgba(78, 21, 184, 0.8);
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+      background: rgba(78, 21, 184, 0.8);
+      color:whitesmoke;
+      font-weight: 300;
+      margin:0px 0px 10px 0px;
+      cursor: pointer;
+    }
+    .todos-page .updateTodos{
+      position:fixed;
+      right:2%;
+      top:1%;
+      padding:10px;
+      display: inline-block;
+      font-size: 18px;
+      border:none;
+      outline: none;
+      background-color:transparent;
+      border: 1px solid rgba(78, 21, 184, 0.2);
+      border-radius:8px;
+      color:rgba(50, 4, 134, 0.9);
+      font-weight: 300;
+      margin:10px;
+      cursor: pointer;
+      transition: all .5s ease;
+    }
+    .todos-page .updateTodos:hover{
+      border: 1px solid rgba(78, 21, 184, 0.8);
+    }
+
+    .todos-page .navigation-button {
+      padding:10px;
+      display: inline-block;
+      font-size: 18px;
+      border:none;
+      outline: none;
+      background-color:transparent;
+      border: 1px solid rgba(78, 21, 184, 0.2);
+      border-radius:8px;
+      color:rgba(50, 4, 134, 0.7);
+      font-weight: 300;
+      margin:10px;
+      text-decoration:none;
+      cursor: pointer;
+      transition: all .5s ease;
+    }
+    .todos-page .navigation-button a {
+      text-decoration: none;
+    }
+
+    .todos-page .footer{
+      position: fixed;
+      width: 100%;
+      display:flex;
+      align-items: center;
+      justify-content: space-between;
+      bottom:0;
+      /* background:#DBD0F0; */
+      background: transparent;
+      backdrop-filter: blur(10px);
+      z-index: 2;
+      left:0;
+      border-top: 1px solid rgba(58, 24, 151, 0.12);
+    }
+
+    .username-display{
+      color:rgba(50, 4, 134, 0.9);
+      margin:10px;
+    }
+
+    .todos-page .navigation-button:hover{
+      border: 1px solid rgba(78, 21, 184, 0.8);
+      color:rgba(50, 4, 134, 0.9);
+    }
+
+  </style>
+</html>
