@@ -7,7 +7,7 @@ const App = () => (
     <ReactRouterDOM.HashRouter>
       <Route path="/login" component={LoginPage} />
       <Route path="/register" component={RegisterPage} />
-      <Route path="/welcome"  component={Page} />
+      <Route path="/" exact  component={Page} />
       <Route path="/todos"  component={Todos} />
     </ReactRouterDOM.HashRouter>
   )
@@ -46,7 +46,7 @@ class LoggedUserDisplay extends React.Component{
     render(){
         return(
             <div className="username-display" >
-                User Logged In : {readCookie('username')}
+                User Logged In : {readCookie('username')? readCookie('username'): 'null'}
             </div>
         )
     }
@@ -55,7 +55,7 @@ class LoggedUserDisplay extends React.Component{
 class TodosPage extends React.Component{
     render(){
         return(
-            <a href="/#/todos">Go to Todos</a>
+            <div></div>
         )
     }
 }

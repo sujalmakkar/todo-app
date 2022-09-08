@@ -7,7 +7,7 @@ const App = () => React.createElement(
     null,
     React.createElement(Route, { path: "/login", component: LoginPage }),
     React.createElement(Route, { path: "/register", component: RegisterPage }),
-    React.createElement(Route, { path: "/welcome", component: Page }),
+    React.createElement(Route, { path: "/", exact: true, component: Page }),
     React.createElement(Route, { path: "/todos", component: Todos })
 );
 
@@ -63,18 +63,14 @@ class LoggedUserDisplay extends React.Component {
             "div",
             { className: "username-display" },
             "User Logged In : ",
-            readCookie('username')
+            readCookie('username') ? readCookie('username') : 'null'
         );
     }
 }
 
 class TodosPage extends React.Component {
     render() {
-        return React.createElement(
-            "a",
-            { href: "/#/todos" },
-            "Go to Todos"
-        );
+        return React.createElement("div", null);
     }
 }
 class TodoDisplay extends React.Component {
