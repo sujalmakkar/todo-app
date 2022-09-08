@@ -9,6 +9,7 @@ const bcrypt = require('bcrypt')
 app.use(bodyParser.json())
 app.use(cookieParser())
 const USER = require('./schema/schema')
+require('dotenv').config()
 
 
 app.use(express.static("static"));
@@ -20,8 +21,8 @@ app.listen(3000,()=>{
 
 //DATABASE CONNECTION
 var db;
-mongoClient.connect(url="mongodb://localhost:27017").then(client=>{
-    db = client.db('27017')
+mongoClient.connect(url=process.env.MONGODB).then(client=>{
+    db = client.db('new')
 }).then(()=>console.log('connected to database')).catch(err=>console.log(err))
 
 
@@ -46,7 +47,7 @@ app.post('/newUser',async (req,res)=>{
     }
 })
 
-const secret = 'randompasswehv2478djavcahjv'
+const secret = process.env.SECRET
 
 app.post('/authenticate', (req,res)=>{
     var data = req.body; //GET SUBMITTED USERNAME AND PASSWORD
