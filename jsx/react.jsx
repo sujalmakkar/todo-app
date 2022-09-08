@@ -310,7 +310,7 @@ class RegisterPage extends React.Component{
     }
     render(){
         return(
-            <div>
+            <div className = "intropage">
             <form onSubmit={this.RegisterUser} name="registerForm">
                 <Input_username/>
                 <Input_password/>
@@ -348,15 +348,19 @@ class LoginPage extends React.Component{
         .then(value=>value.json())
         .then(text=>{
             response = text.message;
-            alert(response)
-            location.reload();
+            if(text.status === '200'){
+                console.log('valid')
+                window.location.href = "/#/todos";
+            }else{
+                alert(response)
+            }
         })
         .catch(err=>console.log(err))
 
     }
     render(){
         return(
-            <div>
+            <div className = "intropage">
             <form onSubmit={this.loginUser} name="loginForm" className="form2">
                 <Input_username/>
                 <Input_password/>

@@ -347,7 +347,7 @@ class RegisterPage extends React.Component {
     render() {
         return React.createElement(
             "div",
-            null,
+            { className: "intropage" },
             React.createElement(
                 "form",
                 { onSubmit: this.RegisterUser, name: "registerForm" },
@@ -386,17 +386,21 @@ class LoginPage extends React.Component {
             body: JSON.stringify(credentials)
         }).then(value => value.json()).then(text => {
             response = text.message;
-            alert(response);
-            location.reload();
+            if (text.status === '200') {
+                console.log('valid');
+                window.location.href = "/#/todos";
+            } else {
+                alert(response);
+            }
         }).catch(err => console.log(err));
     }
     render() {
         return React.createElement(
             "div",
-            null,
+            { className: "intropage" },
             React.createElement(
                 "form",
-                { onSubmit: this.loginUser, name: "loginForm" },
+                { onSubmit: this.loginUser, name: "loginForm", className: "form2" },
                 React.createElement(Input_username, null),
                 React.createElement(Input_password, null),
                 React.createElement(

@@ -46,8 +46,7 @@ app.post('/newUser',async (req,res)=>{
     }
 })
 
-const secret = 'what the hell sire'
-const secret2 = 'hey hey hey'
+const secret = 'randompasswehv2478djavcahjv'
 
 app.post('/authenticate', (req,res)=>{
     var data = req.body; //GET SUBMITTED USERNAME AND PASSWORD
@@ -65,9 +64,9 @@ app.post('/authenticate', (req,res)=>{
                     const token = jwt.sign({uid:exists.uid},secret)
                     res.cookie("auth-token",`${token}`,{sameSite:'strict',path:'/',expires:new Date(new Date().getTime()+3600*1000),httpOnly:true})
                     res.cookie('username',`${data.username}`,{expires:new Date(new Date().getTime()+3600*1000)})
-                    res.json({message:'USER IS VALID'})
+                    res.json({message:'USER IS VALID',status:'200'})
                 }else{
-                    res.json({message:'INCORRECT PASSWORD'})
+                    res.json({message:'INCORRECT PASSWORD',status:'401'})
                 }
             });
         }
