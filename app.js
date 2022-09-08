@@ -47,6 +47,7 @@ app.post('/newUser',async (req,res)=>{
 })
 
 const secret = 'what the hell sire'
+const secret2 = 'hey hey hey'
 
 app.post('/authenticate', (req,res)=>{
     var data = req.body; //GET SUBMITTED USERNAME AND PASSWORD
