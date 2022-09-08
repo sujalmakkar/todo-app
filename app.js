@@ -1,5 +1,4 @@
 const express = require('express')
-// const router = express.Router()
 const mongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser'); 
