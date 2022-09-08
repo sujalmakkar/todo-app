@@ -44,7 +44,7 @@ app.post('/newUser',async (req,res)=>{
         const hashedPassword = await bcrypt.hash(data.password,salt)
 
         await db.collection('userpass').insertOne(new USER({username :data.username,password:hashedPassword,uid:uid}))
-        .then(res.json({message:"Success User Created"}))
+        .then(res.json({message:"Success User Created",status:'200'}))
         .catch(err=>console.log(err))
     }
 })

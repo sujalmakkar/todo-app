@@ -335,9 +335,12 @@ class RegisterPage extends React.Component {
             body: JSON.stringify(credentials)
         }).then(value => value.json()).then(text => {
             response = text.message;
-        }).then(() => {
-            alert(response);
-            location.reload();
+            if (text.status === '200') {
+                window.location.href = "/#/login";
+            } else {
+                alert(response);
+                location.reload();
+            }
         }).catch(err => console.log(err));
     }
     render() {
