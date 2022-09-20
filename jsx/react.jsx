@@ -5,15 +5,21 @@ const Switch = ReactRouterDOM.Switch;
 
 const App = () => (
     <ReactRouterDOM.HashRouter>
+
       <Route path="/login" component={LoginPage} />
+
       <Route path="/register" component={RegisterPage} />
+
       <Route path="/" exact  component={Page} />
+
       <Route path="/todos"  component={Todos} />
+
     </ReactRouterDOM.HashRouter>
   )
 
 class Todo extends React.Component{
     constructor(props){
+        
         super(props)
         this.doneState = this.doneState.bind(this)
         this.delete = this.delete.bind(this)

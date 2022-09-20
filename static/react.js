@@ -5,9 +5,13 @@ const Switch = ReactRouterDOM.Switch;
 const App = () => React.createElement(
     ReactRouterDOM.HashRouter,
     null,
+    
     React.createElement(Route, { path: "/login", component: LoginPage }),
+
     React.createElement(Route, { path: "/register", component: RegisterPage }),
+
     React.createElement(Route, { path: "/", exact: true, component: Page }),
+
     React.createElement(Route, { path: "/todos", component: Todos })
 );
 
